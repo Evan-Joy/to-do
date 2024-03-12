@@ -35,15 +35,25 @@ export class ToDoService {
     return task;
   }
 
-  async findAll() {
+  async findAll(query: TodoFilter) {
     //generate variable to hold res
     let task:TaskRes = null;
 
+    //declare a boolean isDone variable 
+    const isDone = String(query.isDone) === "true" ? true :false;
+
     //make list what found 
-    const result = await this.todoRepo.find();
+    const list = await this.todoRepo.find({
+      where:{
+        isDone: isDone,
+      },
+      order:{
+        createAt:'DESC'
+      }
+    });
 
     //make res notification
-    task = PublicModules.fun_makeResListSucc(result);
+    task = PublicModules.fun_makeResListSucc(list);
 
     //return res
     return task;
@@ -123,3 +133,4 @@ export class ToDoService {
     return task;
   }
 }
+

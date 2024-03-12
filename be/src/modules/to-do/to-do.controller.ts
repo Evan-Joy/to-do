@@ -17,8 +17,8 @@ export class ToDoController {
   }
 
   @Get()
-  findAll() {
-    return this.toDoService.findAll();
+  findAll(@Query() query: TodoFilter) {
+    return this.toDoService.findAll(query);
   }
 
   @Get(':id')
