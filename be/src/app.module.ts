@@ -13,6 +13,8 @@ import { PostModule } from './modules/post/post.module';
 import { MailModule } from './modules/core/mail/mail.module';
 import { PublicModules } from './common/PublicModules';
 import { ChatGateway } from './chat.gateway';
+import { ToDoModule } from './modules/to-do/to-do.module';
+
 
 @Module({
   imports: [
@@ -26,6 +28,7 @@ import { ChatGateway } from './chat.gateway';
     TagNameModule,
     PostModule,
     MailModule,
+    ToDoModule,
   ],
   controllers: [
     AppController,

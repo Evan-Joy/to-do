@@ -4,8 +4,10 @@ const HomePage: React.FC = () => {
   
 
   return (
-    <div className='container'>
+    <div className='center-element'>
+      <div className='container'>
       
+    </div>
     </div>
   );
 };
