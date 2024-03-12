@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
     setTimeout(() => {
       setIsLoading(false);
       dispatch(userLogin({
-        id: 1, userName: 'VietSaclo', fullName: 'Nguyen Quoc Viet',
+        id: 1, userName: 'Evan Joy', fullName: 'Ngo Hong Phuc',
       }));
       UI.toastSuccess('Login success');
     }, 2000);

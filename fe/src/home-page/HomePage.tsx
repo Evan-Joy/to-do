@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
   return (
     <div className='center-element'>
       <div className='container'>
-      
+      Hello
     </div>
     </div>
   );

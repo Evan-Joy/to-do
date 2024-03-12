@@ -51,7 +51,6 @@ const App: React.FC = () => {
 
   return (
     <div className='p-1'>
-      <SelectLang />
       <ToastContainer
         position="bottom-left"
         autoClose={3000}
