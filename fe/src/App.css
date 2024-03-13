@@ -1,8 +1,29 @@
-.center-element{
-  border-color:solid red;
+.container{
   width: 80vw;
-  display: flex;
+  height: 100vh;
+  outline:  solid 1px black;
+  display: block;
   justify-content: center;
   align-items: center;
+}
+.container-box{
+  margin-top: 10px;
+  width: 71.45vw;
+  height: 100vh;
+}
+.task-show{
+  height: 60vh;
+  outline: solid 1px black;
 
+}
+.task-complete{
+  height: 35vh;
+  outline: solid 1px black;
+}
+
+.pointer{
+  cursor:pointer;
+}
+.trikethrough{
+  text-decoration:line-through;
 }

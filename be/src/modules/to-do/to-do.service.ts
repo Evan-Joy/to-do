@@ -99,7 +99,7 @@ export class ToDoService {
     .update(Todo)
     .set({
       isDone: isDone,
-      task: query.todo,
+      // task: query.todo,
       
     })
     .where("id = :id",{id: id})

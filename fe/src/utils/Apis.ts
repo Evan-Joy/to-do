@@ -1,7 +1,12 @@
 const Apis = {
-  API_HOST: 'http://myhufier.ddns.net/api',
+  API_HOST: String(process.env.REACT_APP_API_END_POINT),
   API_TAILER: {
-    GET_POSTS: '/post/filter/v1',
+    AUTH: {
+      ROOT: '/auth'
+    },
+    TODO: {
+      ROOT: '/to-do'
+    }
   }
 }
 
