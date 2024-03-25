@@ -30,6 +30,10 @@ export class ToDoController {
   update(@Param('id') id: string, @Query() query: TodoFilter) {
     return this.toDoService.update(+id, query);
   }
+  @Put('update-to-do/:id')
+  updateTask(@Param('id') id:string, @Body() dto:CreateToDoDto){
+    return this.toDoService.updateTask(+id,dto)
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

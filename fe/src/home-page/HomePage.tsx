@@ -1,4 +1,4 @@
-import { Checkbox, Collapse, Input } from 'antd';
+import { Checkbox, Collapse, Divider, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Apis, Funcs, UI } from '../utils';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -10,6 +10,10 @@ const HomePage: React.FC = () => {
   const [finish, setFinish] = useState<any[]>([]);
   //declare todo hook to call api to get list to do task.
   const [todo, setTodo] = useState<any[]>([]);
+
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState<boolean>(false);
+  //declare any type to take v shouldn't use string bc take task  only 
+  const [getTask, setGetTask] = useState<any>({});
 
   //handle load to do task
   useEffect(() => {
@@ -86,6 +90,21 @@ const HomePage: React.FC = () => {
       loadAllTodo(false);
     }
   }
+  const handleUpdateOk = async () => {
+    const dataRes = await Funcs.fun_put(Apis.API_HOST + Apis.API_TAILER.TODO.UPDATE_TODO + `/${getTask.id}`, {
+      'task': getTask.task,
+    })
+    if (!dataRes.success) {
+      UI.toastError(dataRes.message);
+      return;
+    }
+    UI.toastSuccess("Update 1 task successfully!")
+    loadAllTodo(false);
+    setIsModalUpdateOpen(false);
+  }
+  const handleUpdateCancel = () => {
+    setIsModalUpdateOpen(false);
+  }
   //render UI
   //handle logic.
   return (
@@ -95,16 +114,37 @@ const HomePage: React.FC = () => {
         <div className="task-show">
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header="DANH SÁCH VIỆC CẦN LÀM" key="1">
+              <Modal title="Wanna update task?" visible={isModalUpdateOpen} onOk={handleUpdateOk} onCancel={() => handleUpdateCancel()}>
+                <input onChange={(e) => setGetTask({ ...getTask, task: e.target.value })} value={getTask.task} className='form-control' placeholder='input task you want to edit' type="text" />
+
+              </Modal>
               {todo.map((v, k) => {
                 return (
-                  <div key={k} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between'
-                  }}>
-                    <div>
-                      <Checkbox checked={false} onChange={(e) => handleUpdateIsDoneWithValue(v.id, true)}>{v.task}</Checkbox>
+                  <div key={k}>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}>
+                      <div style={{
+                        width: '98%',
+                      }}>
+                        <div style={{
+                          display: 'flex'
+                        }}>
+                          <div style={{
+                            width: '2%',
+                          }}><Checkbox checked={false} onChange={(e) => handleUpdateIsDoneWithValue(v.id, true)}></Checkbox>&nbsp;</div>
+                          <div className='pointer' onClick={() => {
+                            setIsModalUpdateOpen(true)
+                            setGetTask(v);
+                          }} style={{
+                            width: '98%',
+                          }}><span>{v.task}</span></div>
+                        </div>
+                      </div>
+                      <div className='pointer' onClick={(e) => handleDelete(v.id)}><DeleteOutlined /></div>
                     </div>
-                    <div className='pointer' onClick={(e) => handleDelete(v.id)}><DeleteOutlined /></div>
+                    <Divider className='custom-divider'></Divider>
                   </div>
                 )
               })
@@ -118,8 +158,11 @@ const HomePage: React.FC = () => {
             <Collapse.Panel header="HOÀN THÀNH" key="1">
               {finish.map((v, k) => {
                 return (
-                  <div>
-                    <div className='trikethrough'><Checkbox checked={false} onChange={(e) => handleUpdateIsDoneWithValue(v.id, false)}></Checkbox>{v.task}</div>
+                  <div key={k}>
+                    <div>
+                      <div className='trikethrough'><Checkbox checked={false} onChange={(e) => handleUpdateIsDoneWithValue(v.id, false)}></Checkbox>{v.task}</div>
+                    </div>
+                    <Divider className='custom-divider'></Divider>
                   </div>
                 )
               })

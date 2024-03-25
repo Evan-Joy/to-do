@@ -110,6 +110,26 @@ export class ToDoService {
 
     return task;
   }
+  async updateTask(id:number, dto:CreateToDoDto){
+    //declare a variable to hold res
+    let task: TaskRes = null;
+    //find item by id 
+    const find = await this.todoRepo.findOne({where: {id:id,isDone:false}})
+    //check find
+    if(!find){
+      task= PublicModules.fun_makeResNotFound("not found update id")
+      return task;
+    }
+    //if found 
+    // set task
+    find.task = dto.task;
+    //save
+    const result = await this.todoRepo.save(find);
+    //make nofifycation
+    task= PublicModules.fun_makeResUpdateSucc(result);
+    //return res
+    return task;
+  }
 
   async remove(id: number) {
     // generate variable to hold res 

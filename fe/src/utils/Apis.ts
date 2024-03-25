@@ -5,7 +5,8 @@ const Apis = {
       ROOT: '/auth'
     },
     TODO: {
-      ROOT: '/to-do'
+      ROOT: '/to-do',
+      UPDATE_TODO:'/to-do/update-to-do',
     }
   }
 }
