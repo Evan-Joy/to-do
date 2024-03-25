@@ -146,7 +146,7 @@ export class ToDoService {
     }
     
     //if found  make variable to hold 
-    const result = this.todoRepo.remove(find);
+    const result = await this.todoRepo.remove(find);
     //remove 
     task = PublicModules.fun_makeResDeleteSucc(result);
     //return nofification.
