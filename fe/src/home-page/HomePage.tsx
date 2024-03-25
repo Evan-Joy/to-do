@@ -113,7 +113,7 @@ const HomePage: React.FC = () => {
       <div className="container-box">
         <div className="task-show">
           <Collapse defaultActiveKey={['1']}>
-            <Collapse.Panel header="DANH SÁCH VIỆC CẦN LÀM" key="1">
+            <Collapse.Panel header="TO DO LIST" key="1">
               <Modal title="Wanna update task?" visible={isModalUpdateOpen} onOk={handleUpdateOk} onCancel={() => handleUpdateCancel()}>
                 <input onChange={(e) => setGetTask({ ...getTask, task: e.target.value })} value={getTask.task} className='form-control' placeholder='input task you want to edit' type="text" />
 
@@ -155,7 +155,7 @@ const HomePage: React.FC = () => {
         </div>
         <div className="task-complete">
           <Collapse defaultActiveKey={['1']}>
-            <Collapse.Panel header="HOÀN THÀNH" key="1">
+            <Collapse.Panel header="DONE" key="1">
               {finish.map((v, k) => {
                 return (
                   <div key={k}>
